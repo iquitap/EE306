@@ -1,9 +1,21 @@
+# This program brute forces possible configurations of two muxes to make them form an XOR.
+# This solves question 5b of problem set 2:
+# "Implement F = A xor B using ONLY two 2-to-1 muxes"
+#
+# I somehow coded the entire program without testing it once, and it worked perfectly
+# on its first run. The code below has not been modified from its first version except
+# for formatting edits and new comments being added.
+#
+# Credit to Andy and Bala for discussing with me how to create the program,
+# and motivating me to be the first to implement it.
+#
 #       a     b
 #   ____|_____|___
 #  |              |
 #  |      MUX     |-- s
 #  |______________|
 #
+
 def mux(a, b, s):
     return (a and s) or (b and not s)
 
