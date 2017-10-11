@@ -1,0 +1,81 @@
+0011000000000000
+0101001001100000 ; clear R1 to all 0s, R1 will contain the counter of 1s seen
+0101010010100000 ; clear R2 to all 0s, R2 will contain how many times looped
+0010000001001101 ; get number at address PC + 77 (x3050 - x3003) and put in R0
+0001011010110000 ; add -16 to R2 and put in R3, condition codes reflect R3
+0000010000000110 ; if R3 is 0 (it's been 16 loops), go to exit, otherwise continue
+0001000000100000 ; add 0 to R0 to get new condition codes reflecting R0
+0000011000000001 ; if R0 is non-negative, skip the next line
+0001001001100001 ; increment R1
+0001010010100001 ; increment R2
+0001000000000000 ; double R0 and put result in R0
+0000111111111000 ; shift PC to go back to the R2-16 => R3 step
+; exit
+0001100001111111 ; subtract 1 from R1 and put result in R4
+0000010000000011 ; if R4 is 0, skip to returning 1
+; return 0
+0101100100100000 ; make R4 all 0s
+1011100000000101 ; put R4's value at the address number x3051, which is stored at end of the program
+1111000000100101 ; HALT
+; return 1
+0101100100100000 ; make R4 all 0s
+0001100100100001 ; add 1 to R4 (R4 contains 1 now)
+1011100000000001 ; put R4's value at the address number x3051
+1111000000100101 ; HALT
+0011000001010001 ; the number x3051
+
+### old idea
+0011000000000000
+0101001001100000 # clear R1 to all 0s, R1 will contain the counter of 1s seen
+1111000000100011 # get input from OS into R0, now the condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001000000000000 # double R0 and put result in R0, new condition codes are set
+0000011000000001 # if R0 is non-negative, skip the next line
+0001001001100001 # increment R1
+0001011001111111 # subtract 1 from R1 and put result in R3
+0000010000000001 # if R3 is zero, skip next line
+# return 0
+# return 1
