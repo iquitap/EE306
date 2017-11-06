@@ -1,4 +1,12 @@
-	; R0 contains x, don't touch!!
+	; R0: input x, don't touch!!
+	; R1: counter
+	; R2: coefficient
+	; R3: second coefficient address
+	; R4: second coefficient, output
+	; R5: product of x and coefficient
+	; R6: used for multiplying
+	; R7: don't touch
+	; need to save 1,2,3,5,6
 
 	.ORIG	x5000
 
