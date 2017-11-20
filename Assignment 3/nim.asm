@@ -131,23 +131,25 @@ ERROR   LEA     R0,E_MSG
         TRAP    x21
         BRnzp   PROMPT
 
-        ; Make the move, then check for game over, then swap player and loop to DISPLAY
+        ; Make the move
 VALID_A NOT     R0,R2
         ADD     R0,R0,#1        ; R0 = -R2
         ADD     R4,R4,R0        ; R4 = R4 - R2
-        BRnz    END
-        BRnzp   PRELOOP
+        BRnzp   CHECK
 
 VALID_B NOT     R0,R2
-        ADD     R0,R0,#1        ; R0 = -R2
+        ADD     R0,R0,#1
         ADD     R5,R5,R0        ; R5 = R5 - R2
-        BRnz    END
-        BRnzp   PRELOOP
+        BRnzp   CHECK
 
 VALID_C NOT     R0,R2
-        ADD     R0,R0,#1        ; R0 = -R2
+        ADD     R0,R0,#1
         ADD     R6,R6,R0        ; R6 = R6 - R2
-        BRnz    END
+
+        ; Check for game over
+CHECK   ADD     R0,R4,R5
+        ADD     R0,R0,R6        ; R0 = R4 + R5 + R6
+        BRz     END
         BRnzp   PRELOOP
 
         ; Swap player, loop to DISPLAY
