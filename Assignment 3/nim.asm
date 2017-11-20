@@ -80,13 +80,17 @@ NEXT   LEA     R0,PROMPT2
         ADD     R1,R0,#0        ; R1 = row
         TRAP    x20
         TRAP    x21
-        ADD     R2,R0,#0        ; R2 = number of rocks
+        ADD     R2,R0,#0        ; R2 = number of rocks in ASCII
 
         LD      R0,LF           ; R0 = linefeed character
         TRAP    x21
 
+        ; Convert R2 from ASCII to decimal
+        LD      R0,CONVERT      ; R0 = -30
+        ADD     R2,R2,R0        ; R2 = R2 - 30
+
         ; Check input for bad number: R2 <= 0
-        ADD     R2,R0,#0
+        ADD     R2,R2,#0
         BRnz    ERROR
 
         ; Check input for good row
@@ -167,13 +171,14 @@ WIN1    LD      R0,NUM1
         TRAP    x22
         TRAP    x25             ; HALT
 
+CONVERT .FILL #-48
 ROCK    .FILL x006F
 LF      .FILL x000A
 NUM1    .FILL x0031
 NUM2    .FILL x0032
-LETTERA .FILL x0041
-LETTERB .FILL x0042
-LETTERC .FILL x0043
+LETTERA .FILL xFFBF             ; -x0041
+LETTERB .FILL xFFBE             ; -x0042
+LETTERC .FILL xFFBD             ; -x0043
 A_STR   .STRINGZ "ROW A: "
 B_STR   .STRINGZ "ROW B: "
 C_STR   .STRINGZ "ROW C: "
