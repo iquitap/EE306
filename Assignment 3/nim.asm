@@ -71,7 +71,7 @@ PLAYER1 LD      R0,NUM1
 PLAYER2 LD      R0,NUM2
         TRAP    x21
 
-NEXT   LEA     R0,PROMPT2
+NEXT    LEA     R0,PROMPT2
         TRAP    x22
 
         ; Get input and echo
@@ -151,7 +151,9 @@ VALID_C NOT     R0,R2
         BRnzp   PRELOOP
 
         ; Swap player, loop to DISPLAY
-PRELOOP ADD     R3,R3,#0
+PRELOOP LD      R0,LF           ; R0 = linefeed character
+        TRAP    x21
+        ADD     R3,R3,#0
         BRp     #2
         ADD     R3,R3,#1
         BRnzp   DISPLAY
@@ -159,7 +161,9 @@ PRELOOP ADD     R3,R3,#0
         BRnzp   DISPLAY
 
         ; Announce the other player as winner
-END     LEA     R0,PROMPT1
+END     LD      R0,LF           ; R0 = linefeed character
+        TRAP    x21
+        LEA     R0,PROMPT1
         TRAP    x22             ; PUTS
         ADD     R3,R3,#0
         BRp     WIN1            ; If current player is Player 2, Player 1 wins.
