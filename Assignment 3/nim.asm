@@ -28,34 +28,37 @@
 DISPLAY LEA     R0,A_STR
         TRAP    x22             ; PUTS
         ADD     R1,R4,#0
-LOOP_A  LD      R0,ROCK
+LOOP_A  BRnz    CONT1
+        LD      R0,ROCK
         TRAP    x21             ; OUT
         ADD     R1,R1,#-1
-        BRp     LOOP_A
+        BRnzp   LOOP_A
 
-        LD      R0,LF           ; R0 = linefeed character
+CONT1   LD      R0,LF           ; R0 = linefeed character
         TRAP    x21
 
         LEA     R0,B_STR
         TRAP    x22
         ADD     R1,R5,#0
-LOOP_B  LD      R0,ROCK
+LOOP_B  BRnz    CONT2
+        LD      R0,ROCK
         TRAP    x21
         ADD     R1,R1,#-1
-        BRp     LOOP_B
+        BRnzp   LOOP_B
 
-        LD      R0,LF           ; R0 = linefeed character
+CONT2   LD      R0,LF           ; R0 = linefeed character
         TRAP    x21
 
         LEA     R0,C_STR
         TRAP    x22
         ADD     R1,R6,#0
-LOOP_C  LD      R0,ROCK
+LOOP_C  BRnz    CONT3
+        LD      R0,ROCK
         TRAP    x21
         ADD     R1,R1,#-1
-        BRp     LOOP_C
+        BRnzp   LOOP_C
 
-        LD      R0,LF           ; R0 = linefeed character
+CONT3   LD      R0,LF           ; R0 = linefeed character
         TRAP    x21
 
         ; Display next move prompt string
