@@ -15,9 +15,10 @@ CLEAN   STR     R5,R2,#0
         ADD     R3,R2,R4
         BRn     CLEAN
 
-        ; Prompt the user for a professor's name
+        ; Prompt the user for a professor's name and store the input
 
         LEA     R0,PROMPT
+        LEA     R2,QUERY
         LD      R1,LINEF
         TRAP    x22             ; PUTS (display PROMPT)
 
@@ -25,7 +26,7 @@ INPUT   TRAP    x20             ; GETC
         TRAP    x21             ; OUT
 
         NOT     R0,R0
-        ADD     R0,#1           ; R0 = -R0
+        ADD     R0,R0,#1           ; R0 = -R0
 
         ADD     R3,R0,R1
         BRz     CHECK           ; if inputted character is line feed, branch
