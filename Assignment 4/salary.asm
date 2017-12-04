@@ -65,12 +65,14 @@ NOQUIT  LDI     R1,ROOT         ; R1 contains address of root
         ADD     R0,R0,#0
         BRn     NFOUND
         JSR     PRINT_NUM
-        BRnzp   #2
+        BRnzp   END
 
 NFOUND  LEA     R0,NOPE
         TRAP    x22
+        LD      R0,LINEF
+        TRAP    x21
 
-        BRnzp   LOOP
+END     BRnzp   LOOP
 
 ; ===== SEARCH SUBROUTINE =====
 
