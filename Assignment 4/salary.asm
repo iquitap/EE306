@@ -94,37 +94,51 @@ NONZ1   ADD     R0,R4,R5
 
         ; Return the return value of whichever call was nonzero, or return -1
 LEFT    LDR     R2,R1,#0        ; R2 contains left node address
+        BRz     RIGHT
 
-        ADD     R1,R2,#0        ; R1 = R2
-        BRz     #8
+        ; Push R1
+        ADD     R6,R6,#-1
+        STR     R1,R6,#0
 
         ; Push R7
         ADD     R6,R6,#-1
         STR     R7,R6,#0
 
+        ADD     R1,R2,#0        ; R1 = R2
         JSR     SEARCH
 
         ; Pop R7
         LDR     R7,R6,#0
         ADD     R6,R6,#1
 
+        ; Pop R1
+        LDR     R1,R6,#0
+        ADD     R6,R6,#1
+
         ADD     R0,R0,#0
         BRn     #1              ; if left subtree found professor, return it
         RET
 
-; needs R1 to be saved.. maybe instead of storing where to return in stack, store current location
 RIGHT   LDR     R3,R1,#1        ; R3 contains right node address
-        ADD     R1,R3,#0        ; R1 = R3
         BRz     ENDNODE
+
+        ; Push R1
+        ADD     R6,R6,#-1
+        STR     R1,R6,#0
 
         ; Push R7
         ADD     R6,R6,#-1
         STR     R7,R6,#0
 
+        ADD     R1,R3,#0        ; R1 = R3
         JSR     SEARCH
 
         ; Pop R7
         LDR     R7,R6,#0
+        ADD     R6,R6,#1
+
+        ; Pop R1
+        LDR     R1,R6,#0
         ADD     R6,R6,#1
 
         RET
