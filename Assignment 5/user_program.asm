@@ -36,8 +36,8 @@ SaveR1  .BLKW 1
 ; ===== END OF DELAY SUBROUTINE =====
 
 STACK   .FILL x3000
-TABLE   .FILL x0100
-KEY_INT .FILL x0080
+TABLE   .FILL x0180
+KEY_INT .FILL x1500
 KBSR    .FILL xFE00
 IE_BIT  .FILL x4000
 MSG     .STRINGZ "Input a capital letter from the English alphabet:"
