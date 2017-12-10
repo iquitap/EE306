@@ -34,8 +34,8 @@
         LEA     R2,LOWER
 LOOP    LDR     R3,R2,#0
         BRz     CONT
-WAIT    LDI     R1,DSR
-        BRzp    WAIT
+        LDI     R1,DSR
+        BRzp    #-1
         STI     R3,DDR
         ADD     R2,R2,#1
         BRnzp   LOOP
@@ -49,8 +49,8 @@ CONT    LDI     R1,DSR
         LEA     R2,IS
 LOOP1   LDR     R3,R2,#0
         BRz     CONT1
-WAIT1   LDI     R1,DSR
-        BRzp    WAIT1
+        LDI     R1,DSR
+        BRzp    #-1
         STI     R3,DDR
         ADD     R2,R2,#1
         BRnzp   LOOP1
@@ -58,20 +58,20 @@ WAIT1   LDI     R1,DSR
         ; Print lowercase version of the letter
 CONT1   LD      R1,OFFSET
         ADD     R0,R0,R1
-WAIT2   LDI     R1,DSR
-        BRzp    WAIT2
+        LDI     R1,DSR
+        BRzp    #-1
         STI     R0,DDR
 
         ; Print period
         LD      R3,PERIOD
-WAIT3   LDI     R1,DSR
-        BRzp    WAIT3
+        LDI     R1,DSR
+        BRzp    #-1
         STI     R3,DDR
 
         ; Print linefeed
         LD      R3,LF
-WAIT4   LDI     R1,DSR
-        BRzp    WAIT4
+        LDI     R1,DSR
+        BRzp    #-1
         STI     R3,DDR
 
         BRnzp   EXIT
@@ -87,16 +87,16 @@ ERR     LDI     R1,DSR
         LEA     R2,ERR_MSG
 LOOP2   LDR     R0,R2,#0
         BRz     CONT2
-WAIT5   LDI     R1,DSR
-        BRzp    WAIT5
+        LDI     R1,DSR
+        BRzp    #-1
         STI     R0,DDR
         ADD     R2,R2,#1
         BRnzp   LOOP2
 
         ; Print linefeed
 CONT2   LD      R3,LF
-WAIT6   LDI     R1,DSR
-        BRzp    WAIT6
+        LDI     R1,DSR
+        BRzp    #-1
         STI     R3,DDR
 
 ; ===== EXIT =====
